@@ -1,0 +1,101 @@
+enum Target {  
+    tgWeb
+    tgMobile
+    tgBoth
+}
+
+enum Schedule {
+    scRecurring
+    scTransactional
+    scOneTime
+}
+
+type Survey {
+    id: ID!
+    name: String!
+    nps: Int
+    customers: Int
+    responses: Int
+    active: Boolean!
+    target: Target!
+    schedule: Schedule!
+    recurringShowFirst: Int!
+    recurringShowInterval: Int!
+    textProductName: String!
+    textAudience: String!
+    textFollowUpDetractors: String!
+    textFollowUpPassives: String!
+    textFollowUpPromoters: String!
+    textThankYouMsg: String!
+    colorButtonText: String!
+    colorButtonBgd: String!
+    colorText: String!
+    colorBgd: String!
+    appearScrim: Boolean!
+    appearDelay: Int!
+    appearHideBrand: Boolean!
+}
+
+type Query {
+    survey(id: ID!): Survey!
+    surveys: [Survey!]!
+}
+
+input updateSurveyInput {
+    name: String
+    active: Boolean
+    target: Target
+    schedule: Schedule
+    recurringShowFirst: Int
+    recurringShowInterval: Int
+    textProductName: String
+    textAudience: String
+    textFollowUpDetractors: String
+    textFollowUpPassives: String
+    textFollowUpPromoters: String
+    textThankYouMsg: String
+    colorButtonText: String
+    colorButtonBgd: String
+    colorText: String
+    colorBgd: String
+    appearScrim: Boolean
+    appearDelay: Int
+    appearHideBrand: Boolean
+}
+
+input createSurveyInput {
+    name: String!
+    target: Target!
+    schedule: Schedule!
+    recurringShowFirst: Int!
+    recurringShowInterval: Int!
+    textProductName: String!
+    textAudience: String!
+    textFollowUpDetractors: String!
+    textFollowUpPassives: String!
+    textFollowUpPromoters: String!
+    textThankYouMsg: String!
+    colorButtonText: String!
+    colorButtonBgd: String!
+    colorText: String!
+    colorBgd: String!
+    appearScrim: Boolean!
+    appearDelay: Int!
+    appearHideBrand: Boolean!
+}
+
+
+type Mutation {
+    createSurvey(data: createSurveyInput!): Survey!
+    updateSurvey(id: ID!, data: updateSurveyInput!): Survey!
+    deleteSurvey(id: ID!): Survey!
+}
+
+type SurveySubscriptionPayload {
+    mutation: MutationType!
+    data: Survey!
+} 
+
+type Subscription {
+    survey: SurveySubscriptionPayload!
+}
